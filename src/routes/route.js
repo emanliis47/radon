@@ -13,7 +13,7 @@ router.get('/test-me', function (req, res) {
     module3.spaceTrim()
     module3.toLowerCh()
     module3.toUpperCh()
-    res.send('Welcome to my application. I am SameerSweety and a part of FunctionUp Thorium cohort')
+    res.send('Welcome to my application. I am SameerSweety and a part of FunctionUp Radon cohort')
 });
 
 
