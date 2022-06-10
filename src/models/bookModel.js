@@ -7,6 +7,10 @@ const newBookSchema = new mongoose.Schema({
         type:ObjectId,
         ref:"newAuthor"
     },
+    publisherid:{
+        type:ObjectId,
+        ref:"newPublisher"
+    },
 	price: Number,
     ratings:Number,
 	publisher: String
