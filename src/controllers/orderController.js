@@ -3,18 +3,15 @@
  const UserModel= require("../models/userModel")
 const createaOrder = async function(req, res){
     let orderDatas = req.body
-    let isProductValid= await ProductModel.findOne({_id:orderDatas.userId})
+    let actualData= req.body.productId
+    let actuallData = req.body.userId
+    let isProductValid= await ProductModel.findById({_id: actualData})
     console.log(isProductValid)
-    let isUserValid= await UserModel.findOne({_id:orderDatas.productId})
+    let isUserValid= await UserModel.findById({_id: actuallData})
     console.log(isUserValid)
-    if(isUserValid == null && isProductValid == null){
+    if(isUserValid == null || isProductValid == null){
         res.send({msg: "userId and productId is mandatory"})
     }
-    // if(isUserValid.isfreeappuser) {
-        //     data.amount = 0;
-        //     let createdData = await OrderModel.create(orderDatas)
-        //     res.send({msg: createdData})
-
         if (isProductValid.price > isUserValid.balance){
 
             console.log("Insufficient Balance")
