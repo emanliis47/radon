@@ -29,12 +29,6 @@ const getUserData = async function (req, res) {
   let decodedToken = jwt.verify(token, "functionup-radon");
   if (!decodedToken)
     return res.send({ status: false, msg: "token is invalid" });
-
-  let userId = req.params.userId;
-  let userDetails = await userModel.findById(userId);
-  if (!userDetails)
-    return res.send({ status: false, msg: "No such user exists" });
-
   res.send({ status: true, data: userDetails });
 };
 // Dubble OK OK
@@ -54,6 +48,19 @@ let checkId1= await userModel.findById(UserId1)
   return res.send({ status: false, msg: "No such user exists" })
   let UserDelete= await userModel.findOneAndUpdate({_id:checkId1},{$set:{isDelete: true}})
   res.send({Status:"Deleted", msg: UserDelete})
+}
+const userPost = async function(req, res){
+let tokenchk= req.headers["x-auth-token"]
+if(!tokenchk) return res.send({Status: false, mgs: "Please Enter Your Token"})
+let varifyToken = jwt.verify(tokenchk, "functionup-radon")
+if(!varifyToken) return res.send({Status: false, msg: "User Is Not Exist"})
+let userId2 = req.params.userId
+let userVerify = await userModel.findById({_id: userId2})
+if(!userVerify) return res.send({Status: false, mgs:"User Is Not Found"})
+let post= req.params.post
+let massage= req.body.massage
+let pushMassage = massage.push(massage)
+
 }
 
 module.exports.createaUser = createaUser;

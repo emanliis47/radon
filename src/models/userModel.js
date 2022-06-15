@@ -23,7 +23,11 @@ const userSchema = new mongoose.Schema( {
         enum: ["male", "female", "other"]
     },
     age: Number,
-    isDelete: Boolean
+    isDelete: Boolean,
+    massage:{
+        type: [String],
+        default: []
+    }
 }, { timestamps: true });
 
 module.exports = mongoose.model('CreateaUser', userSchema)
